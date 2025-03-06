@@ -16,7 +16,6 @@ class NoteAdapter (private val onItemClickCallback : OnItemClickCallback) :
             if (listNotes.size > 0) {
                 this.listNotes.clear()
             }
-            this.listNotes.addAll(listNotes)
         }
     fun addItem(note : Note) {
         this.listNotes.add(note)

@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                     val note = result.data?.getParcelableExtra<Note>(NoteAddUpdateActivity.EXTRA_NOTE) as Note
                     val position = result.data?.getIntExtra(NoteAddUpdateActivity.EXTRA_POSITION, 0) as Int
                     adapter.updateItem(position, note)
-                    binding.rvNotes.smoothScrollToPosition(position)
                     showSnackbarMessage("Satu item berhasil diubah")
                 }
                 NoteAddUpdateActivity.RESULT_DELETE -> {

@@ -71,6 +71,7 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.title = actionBarTitle
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.btnSubmit.text = btnTitle
+        binding.btnSubmit.setOnClickListener(this)
 
         onBackPressedDispatcher.addCallback(this,
             object : OnBackPressedCallback(true) {
@@ -78,8 +79,8 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                     showAlertDialog(ALERT_DIALOG_CLOSE)
                 }
             })
-        binding.btnSubmit.setOnClickListener (this)
     }
+
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.btn_submit) {
@@ -91,7 +92,7 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
             }
             note?.title = title
             note?.description = description
-            val intent = intent
+            val intent = Intent()
             intent.putExtra(EXTRA_NOTE,note)
             intent.putExtra(EXTRA_POSITION,position)
 
@@ -104,18 +105,18 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                     setResult(RESULT_UPDATE, intent)
                     finish()
                 } else {
-                    Toast.makeText(this, "Gagal mengupdate data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@NoteAddUpdateActivity, "Gagal mengupdate data", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 note?.date = getCurrentDate()
-                values.put(DATE,getCurrentDate())
+                values.put(DatabaseContract.NoteColums.DATE,getCurrentDate())
                 val result = noteHelper.insert(values)
                 if (result > 0) {
                     note?.id = result.toInt()
                     setResult(RESULT_ADD,intent)
                     finish()
                 }else{
-                    Toast.makeText(this, "Gagal menambah data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@NoteAddUpdateActivity, "Gagal menambah data", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -175,7 +176,7 @@ class NoteAddUpdateActivity : AppCompatActivity(), View.OnClickListener {
                         setResult(RESULT_DELETE,intent)
                         finish()
                     }else{
-                        Toast.makeText(this, "Gagal menghapus data", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@NoteAddUpdateActivity, "Gagal menghapus data", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -2,7 +2,7 @@ package com.example.mynoteapps.db
 
 import android.provider.BaseColumns
 
-internal class DatabaseContract {
+ class DatabaseContract {
 
     internal class NoteColums : BaseColumns {
         companion object {
